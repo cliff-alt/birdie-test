@@ -1,8 +1,8 @@
-import * as express from "express";
-import {pingController} from "./controllers/ping";
+import * as express from 'express';
+import { eventController } from './controllers/event';
 
 const app = express();
 
-app.use(pingController);
+app.use('/events', eventController);
 
 export default app;
