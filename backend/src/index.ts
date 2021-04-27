@@ -10,9 +10,8 @@ createConnection()
       // tslint:disable-next-line:no-console
       console.log(`Server started at http://localhost:${port}`);
     });
-
   })
   .catch(error => {
-      // tslint:disable-next-line:no-console
-      console.log(error)
+    // tslint:disable-next-line:no-console
+    console.log(error);
   });
