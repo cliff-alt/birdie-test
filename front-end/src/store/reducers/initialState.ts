@@ -4,4 +4,9 @@ export default {
     error: undefined,
     loading: false,
   },
+  summaryData: {
+    summary: undefined,
+    loading: false,
+    error: undefined,
+  },
 };

@@ -8,11 +8,17 @@ import Banner from '@App/components/banner/Banner';
 import { requestEvents } from '@App/store/actions/event';
 import { CareEvent } from '@App/api/event';
 import { CareEventList } from '@App/components/events/CareEventList';
+import { Summary } from '@App/api/summary';
+import { requestSummary } from '@App/store/actions/summary';
+import { SummaryArea } from '@App/components/summary/SummaryArea';
 
 interface AppProps {
   events: CareEvent[];
   eventsLoading: boolean;
   requestEvents: (page?: number) => void;
+  summary: Summary;
+  summaryLoading: boolean;
+  requestSummary: () => void;
 }
 
 interface AppState {
@@ -25,6 +31,12 @@ const GlobalStyle = createGlobalStyle`
     background-color: #f3f3f3;
     font-family: sans-serif;
   }
+`;
+
+const AppContainer = styled.div`
+  padding: 0 25px;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 const LoadMoreEvents = styled.button`
@@ -47,6 +59,7 @@ class App extends React.Component<AppProps, AppState> {
       page: 0,
     };
     this.props.requestEvents();
+    this.props.requestSummary();
   }
 
   getMoreEvents() {
@@ -55,20 +68,29 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   public render() {
+    const { events, eventsLoading, summary, summaryLoading } = this.props;
     return (
       <>
         <GlobalStyle />
         <Banner />
-        {this.props.eventsLoading && this.props.events.length <= 0 ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <CareEventList events={this.props.events} />
-            <LoadMoreEvents onClick={() => this.getMoreEvents()}>
-              {this.props.eventsLoading ? 'Loading...' : 'Get More Events'}
-            </LoadMoreEvents>
-          </>
-        )}
+        <AppContainer>
+          {summaryLoading || !summary ? (
+            <div>Loading Summary...</div>
+          ) : (
+            <SummaryArea summary={summary} />
+          )}
+
+          {eventsLoading && events.length <= 0 ? (
+            <div>Loading Events...</div>
+          ) : (
+            <>
+              <CareEventList events={events} />
+              <LoadMoreEvents onClick={() => this.getMoreEvents()}>
+                {eventsLoading ? 'Loading...' : 'Get More Events'}
+              </LoadMoreEvents>
+            </>
+          )}
+        </AppContainer>
       </>
     );
   }
@@ -77,10 +99,13 @@ class App extends React.Component<AppProps, AppState> {
 const mapStateToProps = (state: RootState) => ({
   events: state.eventData.events,
   eventsLoading: state.eventData.loading,
+  summary: state.summaryData.summary,
+  summaryLoading: state.summaryData.loading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootState>) => ({
   requestEvents: (page = 0) => dispatch(requestEvents(page)),
+  requestSummary: () => dispatch(requestSummary()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

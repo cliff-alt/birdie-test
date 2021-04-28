@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
 import initialState from '@App/store/reducers/initialState';
 import { requestEvents } from '@App/store/actions/event';
+import { requestSummary } from '@App/store/actions/summary';
 
 const mockStore = configureStore([]);
 
@@ -26,7 +27,7 @@ describe('App Component', () => {
     );
   });
 
-  it('fetches the first page of events on load', () => {
+  it('fetches the first page of events and the summary on load', () => {
     const div = document.createElement('div');
     ReactDOM.render(
       <Provider store={store}>
@@ -35,7 +36,8 @@ describe('App Component', () => {
       div
     );
 
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledTimes(2);
     expect(store.dispatch).toHaveBeenCalledWith(requestEvents());
+    expect(store.dispatch).toHaveBeenCalledWith(requestSummary());
   });
 });
