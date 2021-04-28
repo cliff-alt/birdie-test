@@ -13,6 +13,7 @@ Deployed to [Heroku](https://powerful-castle-05756.herokuapp.com/).
    - Added event information and a top level summary
    - Sagas control retrieval of each set of information
    - moment.js has been used to parse and format dates
+   - added the concept of sensitive events, where a button needs to be pressed to view further detail
     
 ## Shortfalls
 Some areas that need improving if this were taken further
