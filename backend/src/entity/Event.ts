@@ -27,6 +27,9 @@ export class Event {
   @Column({ name: 'event_type' })
   public type: string;
 
+  @Column({ name: 'care_recipient_id' })
+  public careRecipient: string;
+
   // Used to conditionally hide details that may be a little more sensitive than others.
   public sensitive = false;
 

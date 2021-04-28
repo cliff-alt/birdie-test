@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { getRepository } from 'typeorm';
 import { Event } from '../entity/Event';
+import { CareRecipient } from '../care-recipient';
 
 export const eventController = express.Router();
 
@@ -15,6 +16,9 @@ eventController.get('/', async (req, res) => {
     await repo.find({
       skip,
       take: DEFAULT_PAGE_SIZE,
+        where: {
+            careRecipient: CareRecipient,
+        }
     })
   );
 });
