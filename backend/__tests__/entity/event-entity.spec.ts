@@ -5,6 +5,7 @@ describe('Event Entity', () => {
   it('should parse values from the payload and set display text', () => {
     const payload: IEventPayload = { note: 'some text' };
     const event = new Event();
+    event.type = 'some_type';
     event.payload = payload;
 
     event.parsePayload();

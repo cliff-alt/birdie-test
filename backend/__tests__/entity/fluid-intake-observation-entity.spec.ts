@@ -9,6 +9,7 @@ describe('FluidIntakeObservation Entity', () => {
       observed: true,
     };
     const event = new FluidIntakeObservation();
+    event.type = 'some_type';
     event.payload = payload;
 
     event.parsePayload();

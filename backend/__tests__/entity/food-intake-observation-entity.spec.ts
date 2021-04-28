@@ -8,6 +8,7 @@ describe('FoodIntakeObservation Entity', () => {
       note: 'biscuits',
     };
     const event = new FoodIntakeObservation();
+    event.type = 'some_type';
     event.payload = payload;
 
     event.parsePayload();

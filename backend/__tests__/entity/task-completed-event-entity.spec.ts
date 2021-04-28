@@ -7,6 +7,7 @@ describe('TaskCompletedEvent Entity', () => {
       task_definition_description: 'Assist with oral hygiene',
     };
     const event = new TaskCompletedEvent();
+    event.type = 'some_type';
     event.payload = payload;
 
     event.parsePayload();

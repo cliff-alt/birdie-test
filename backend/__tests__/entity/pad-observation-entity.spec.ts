@@ -8,6 +8,7 @@ describe('PadObservation Entity', () => {
       pad_condition: 'soiled',
     };
     const event = new PadObservation();
+    event.type = 'some_type';
     event.payload = payload;
 
     event.parsePayload();

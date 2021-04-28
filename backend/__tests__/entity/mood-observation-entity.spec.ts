@@ -7,6 +7,7 @@ describe('MoodObservation Entity', () => {
       mood: 'happy',
     };
     const event = new MoodObservation();
+    event.type = 'some_type';
     event.payload = payload;
 
     event.parsePayload();
