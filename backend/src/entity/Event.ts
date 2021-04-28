@@ -47,12 +47,13 @@ export class Event {
    */
   @AfterLoad()
   public parsePayload() {
-    this.parseNote();
+    this.parseDefaults();
     delete this.payload;
   }
 
-  private parseNote() {
+  private parseDefaults() {
     if (this.payload) {
+      this.type = this.type.split('_').join(' '); // Neaten up the type for display
       this.note = this.payload.note;
       this.displayText = this.getDisplayText();
     }
